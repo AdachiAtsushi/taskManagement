@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskListService;
@@ -34,6 +35,14 @@ public class TaskListController {
 	/**
 	 * 検索機能
 	 */
+	@GetMapping("/search")
+	public String searchList(@RequestParam("keyword") String keyword, Model model) {
+		List<Task> list = this.service.getSearchTaskList(keyword);
+		
+		model.addAttribute("taskList", list);
+		
+		return "task/list";
+	}
 	
 	/**
 	 * 削除機能

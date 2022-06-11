@@ -2,3 +2,5 @@
 INSERT INTO task (id, title, comment, priority, start_time, end_time, finish_flg) VALUES (1, 'test1', '‚¨‚½‚ß‚µ', '1', '2022-06-01 12:00:00', null, false);
 INSERT INTO task (id, title, comment, priority, start_time, end_time, finish_flg) VALUES (2, 'test2', '‚³‚ñ‚±‚¤', '2', '2022-06-01 12:00:00', null, false);
 INSERT INTO task (id, title, comment, priority, start_time, end_time, finish_flg) VALUES (3, 'test3', '‚Ä‚·‚Æ', '3', '2022-06-01 12:00:00', null, false);
+INSERT INTO task (id, title, comment, priority, start_time, end_time, finish_flg) VALUES (4, 'test4', '‚½‚ß‚»‚¤', '2', '2022-06-01 12:00:00', null, false);
+INSERT INTO task (id, title, comment, priority, start_time, end_time, finish_flg) VALUES (5, 'test5', '‚½‚ß‚É‚È‚é‚Í‚È‚µ', '2', '2022-06-01 12:00:00', null, false);

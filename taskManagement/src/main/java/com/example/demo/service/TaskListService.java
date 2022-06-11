@@ -19,4 +19,7 @@ public class TaskListService {
 		return this.repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 	}
 	
+	public List<Task> getSearchTaskList(String keyword) {
+		return this.repository.searchByTaskList(keyword);
+	}
 }
