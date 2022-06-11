@@ -9,20 +9,20 @@
     <table>
         <thead>
             <tr>
-                <td>ID</td>
-                <td>タイトル</td>
-                <td>優先度</td>
-                <td>開始日時</td>
-                <td>終了日時</td>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>優先度</th>
+                <th>開始日時</th>
+                <th>終了日時</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>ID</td>
-                <td>タイトル</td>
-                <td>優先度</td>
-                <td>2022/06/01 12:00</td>
-                <td>2022/06/02 12:00</td>
+            <tr th:each="task : ${taskList}">
+                <td th:text="${task.id}">ID</td>
+                <td th:text="${task.title}">タイトル</td>
+                <td th:text="${task.priority}">優先度</td>
+                <td th:text="${task.startTime}">2022/06/01 12:00</td>
+                <td th:text="${task.endTime}">2022/06/02 12:00</td>
                 <td><a>詳細</a></td>
                 <td><a>削除</a></td>
             </tr>

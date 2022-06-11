@@ -1,13 +1,22 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Task;
+import com.example.demo.service.TaskListService;
+
 @Controller
 @RequestMapping("/task")
 public class TaskListController {
+	
+	@Autowired
+	TaskListService service;
 	
 	/**
 	 * 初期表示
@@ -15,11 +24,9 @@ public class TaskListController {
 	 */
 	@GetMapping("/list")
 	public String initList(Model model) {
-		// FIXME テーブル名「タスク」より全件取得する
+		List<Task> list = this.service.getTaskList();
 		
-		// FIXME 取得データをリストに格納
-		
-		// FIXME 取得データをModelに設定
+		model.addAttribute("taskList", list);
 		
 		return "task/list";
 	}

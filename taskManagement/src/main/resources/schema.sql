@@ -1,5 +1,5 @@
 CREATE TABLE task (
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL,
     title VARCHAR(10) NOT NULL,
     comment VARCHAR(100) NOT NULL,
     priority CHAR(1) NOT NULL,
