@@ -54,5 +54,16 @@ public class TaskListController {
 		
 		return "redirect:/task/list";
 	}
+	
+	/**
+	 * 詳細画面遷移
+	 */
+	@GetMapping("/detail")
+	public String detailTask(@RequestParam("id") Integer id, Model model) {
+		// テーブル名「Task」から指定したIDのレコードを取得する
+		model.addAttribute("taskInfo", null);
+		
+		return "task/detail";
+	}
 
 }
