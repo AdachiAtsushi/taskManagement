@@ -47,5 +47,12 @@ public class TaskListController {
 	/**
 	 * 削除機能
 	 */
+	@GetMapping("/delete")
+	public String delete(@RequestParam("id") Integer id, Model model) {
+		// 取得したIDより、テーブル名「Task」のレコードを削除する
+		this.service.delete(id);
+		
+		return "redirect:/task/list";
+	}
 
 }
