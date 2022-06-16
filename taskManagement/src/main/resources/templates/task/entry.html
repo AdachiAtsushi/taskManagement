@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>タスク登録画面</title>
+</head>
+<body>
+    <!-- FIXME ヘッダー部を共通化 -->
+    <h1>タスク登録画面</h1>
+    
+    <form method="POST" action="#" th:action="@{/task/register}" th:object="${taskForm}">
+        <label for="id">ID：</label>
+        <!-- FIXME スタイルを検討する -->
+        <input id="id" name="id" type="text" readonly tabindex="-1" th:field="*{id}" style="border: 0;"><br>
+        
+        <label for="title">タイトル：
+        <input id="title" name="title" type="text" th:field="*{title}"><br>
+        
+        <label for="comment">コメント：
+        <textarea name="comment" id="comment" rows="2" cols="40" th:field="*{comment}"></textarea><br>
+        
+        <label for="priority">優先度：
+        <select for="priority" name="priority">
+            <option 
+                th:each="priorityObj : ${priorityList}" 
+                th:value="${priorityObj.priority}" 
+                th:selected="${priorityObj.priority == priority}">[[${priorityObj.priorityText}]]
+            </option>
+        </select><br>
+        
+        <label for="startTime">開始日：
+        <input id="startTime" name="startTime" type="datetime-local" th:value="*{startTime}"><br>
+        
+        <label for="endTime">終了日時：
+        <input id="endTime" name="endTime" type="datetime-local" th:field="*{endTime}"><br>
+        
+        <input type="submit" value="登録">
+    </form>
+    
+    <!-- FIXME フッター部を共通化 -->
+</body>
+</html>
