@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,7 +26,6 @@ public class Task implements Serializable {
 	 */
 	@Id
 	@NotNull
-	@GeneratedValue
 	@Column(name = "id")
 	private Integer id;
 	
@@ -62,6 +60,7 @@ public class Task implements Serializable {
 	/**
 	 * I—¹“ú
 	 */
+	@NotNull
 	@Column(name = "end_time")
 	private LocalDateTime endTime;
 	
