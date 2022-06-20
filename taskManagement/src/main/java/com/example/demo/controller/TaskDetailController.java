@@ -82,4 +82,12 @@ public class TaskDetailController {
 		// タスク一覧画面にリダイレクト処理を実施する
 		return "redirect:/task/list";
 	}
+	
+	@PostMapping(params = "delete")
+	public String delete(TaskForm taskForm) {
+		this.service.deleteTask(taskForm.getId());
+		
+		// タスク一覧画面にリダイレクト処理を実施する
+		return "redirect:/task/list";
+	}
 }

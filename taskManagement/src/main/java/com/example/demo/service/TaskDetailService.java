@@ -63,4 +63,8 @@ public class TaskDetailService {
 	public void updateTask(Task task) {
 		this.taskRepository.save(task);
 	}
+	
+	public void deleteTask(int id) {
+		this.taskRepository.deleteById(id);
+	}
 }
