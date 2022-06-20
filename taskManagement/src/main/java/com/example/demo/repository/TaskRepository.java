@@ -22,4 +22,11 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	
 	@Query("SELECT MAX(t.id) FROM Task t WHERE NOT t.mstStatus.statusId = '4'")
 	public int findByMaxId();
+	
+	/**
+	 * ステータスが「完了」になっているテーブル名「タスク」の一覧を取得する。
+	 * @return ステータス「完了」のテーブル名「タスク」の一覧
+	 */
+	@Query("SELECT t FROM Task t WHERE t.mstStatus.statusId = '3'")
+	public List<Task> findByClosingTaskList();
 }
