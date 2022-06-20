@@ -58,8 +58,7 @@ public class TaskDetailService {
 	}
 	
 	/**
-	 * 
-	 * @param task
+	 * テーブル名「タスク」を更新する
 	 */
 	public void updateTask(Task task) {
 		this.taskRepository.save(task);
