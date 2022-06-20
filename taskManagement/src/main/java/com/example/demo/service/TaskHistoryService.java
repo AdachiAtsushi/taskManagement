@@ -21,4 +21,12 @@ public class TaskHistoryService {
 	public List<Task> getClosingTaskList() {
 		return this.taskRepository.findByClosingTaskList();
 	}
+	
+	/**
+	 * テーブル名「タスク」の指定したIDのレコードを削除する。
+	 * @param id
+	 */
+	public void deleteTaskHistory(int id) {
+		this.taskRepository.deleteById(id);
+	}
 }
