@@ -7,7 +7,45 @@
 <body>
     <!-- FIXME ヘッダー部を共通化 -->
     <h1>詳細画面</h1>
-    <a href="/task/list">一覧画面に戻る</a>
+    <form method="POST" action="#" th:action="@{/task}" th:object=${task}>
+        <label for="id">ID：</label>
+        <input id="id" name="id" type="text" readonly tabindex="-1" th:field="*{id}"><br>
+        
+        <label>タイトル：</label>
+        <input id="title" name="title" type="text" th:field="*{title}"><br>
+        
+        <label>コメント：</label>
+        <textarea id="comment" name="comment" rows="2" cols="40" th:field="*{comment}"></textarea><br>
+        
+        <label for="priority">優先度：</label>
+        <select for="priority" name="priority">
+            <option 
+                th:each="priorityObj : ${priorityList}" 
+                th:value="${priorityObj.priority}" 
+                th:text="${priorityObj.priorityText}" 
+                th:selected="${priorityObj.priority} == *{mstPriority.priority}">
+            </option>
+        </select><br>
+        
+        <label for="startTime">開始日時：</label>
+        <input id="startTime" name="startTime" type="datetime-local" th:value="*{startTime}"><br>
+        
+        <label for="endTime">終了日時：</label>
+        <input id="endTime" name="endTime" type="datetime-local" th:value="*{endTime}"><br>
+        
+        <label for="statusId">ステータス：</label>
+        <select for="statusId" name="statusId">
+            <option 
+                th:each="statusObj : ${statusList}" 
+                th:value="${statusObj.statusId}" 
+                th:text="${statusObj.statusText}" 
+                th:selected="${statusObj.statusId} == *{mstStatus.statusId}">
+            </option>
+        </select><br>
+        
+        <input type="submit" name="" value="更新">
+        <input type="submit" name="" value="削除">
+    </form>
     <!-- FIXME フッター部を共通化 -->
 </body>
 </html>

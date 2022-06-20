@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -46,9 +48,9 @@ public class Task implements Serializable {
 	/**
 	 * 優先度
 	 */
-	@NotNull
-	@Column(name = "priority")
-	private String priority;
+	@OneToOne
+	@JoinColumn(name = "priority", insertable = false, updatable = false)
+	private MstPriority mstPriority;
 	
 	/**
 	 * 開始日時
@@ -65,9 +67,10 @@ public class Task implements Serializable {
 	private LocalDateTime endTime;
 	
 	/**
-	 * 終了フラグ
+	 * ステータスID
 	 */
-	@Column(name = "finish_flg")
-	private Boolean finishFlg;
+	@OneToOne
+	@JoinColumn(name = "status_id", insertable = false, updatable = false)
+	private MstStatus mstStatus;
 	
 }
