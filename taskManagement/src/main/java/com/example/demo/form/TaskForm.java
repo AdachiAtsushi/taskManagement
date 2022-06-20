@@ -2,7 +2,6 @@ package com.example.demo.form;
 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -51,8 +50,9 @@ public class TaskForm {
 	private LocalDateTime endTime;
 	
 	/**
-	 * タスク終了フラグ
+	 * ステータスID
 	 */
-	private boolean finishFlg;
+	@NotNull
+	private String statusId;
 
 }
