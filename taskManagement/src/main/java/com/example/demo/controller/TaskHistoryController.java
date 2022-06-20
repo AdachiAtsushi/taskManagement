@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskHistoryService;
@@ -31,17 +30,5 @@ public class TaskHistoryController {
 		model.addAttribute("taskList", taskList);
 		
 		return "task/history";
-	}
-	
-	/**
-	 * テーブル名「タスク」のデータを削除する
-	 * @param id ID
-	 * @return
-	 */
-	@GetMapping("/deleteHistory")
-	public String deleteHistory(@RequestParam("id") int id) {
-		this.service.deleteTaskHistory(id);
-		
-		return "redirect:/task/history";
 	}
 }
