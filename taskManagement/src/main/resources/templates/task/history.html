@@ -33,7 +33,7 @@
                 <td th:text="${task.startTime}">2022/06/01 12:00</td>
                 <td th:text="${task.endTime}">2022/06/02 12:00</td>
                 <td><a th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
-                <td><a th:href="@{/task/delete(id=${task.id})}">削除</a></td>
+                <td><a th:href="@{/task/deleteHistory(id=${task.id})}">削除</a></td>
             </tr>
         </tbody>
     </table>
