@@ -34,6 +34,21 @@ public class TaskHistoryController {
 	}
 	
 	/**
+	 * タスク履歴画面の検索機能
+	 * @param keyword 入力キーワード
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("searchHistory")
+	public String searchHistory(@RequestParam("keyword") String keyword, Model model) {
+		List<Task> taskList = this.service.getSearctClosingTaskList(keyword);
+		
+		model.addAttribute("taskList", taskList);
+		
+		return "task/history";
+	}
+	
+	/**
 	 * テーブル名「タスク」の指定のIDのレコードを削除する
 	 * @param id 指定のID
 	 * @return

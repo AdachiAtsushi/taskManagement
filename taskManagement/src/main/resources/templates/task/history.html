@@ -7,7 +7,7 @@
 <body>
     <!-- FIXME ヘッダー部を共通化 -->
     <!-- 検索キーワード入力欄-->
-    <form method="GET" th:action="@{/task/search}">
+    <form method="GET" th:action="@{/task/searchHistory}">
         <input id="keyword" name="keyword" type="text">
         <input id="clear" name="clear" type="button" value="クリア" onclick="textClear();">
         <input type="submit" value="検索">

@@ -23,6 +23,15 @@ public class TaskHistoryService {
 	}
 	
 	/**
+	 * 入力キーワードからステータスが「完了」になっているタスクの一覧を取得する
+	 * @param keyword
+	 * @return テーブル名「タスク」の一覧
+	 */
+	public List<Task> getSearctClosingTaskList(String keyword) {
+		return this.taskRepository.searchByClosingTaskList(keyword);
+	}
+	
+	/**
 	 * テーブル名「タスク」の指定のIDのレコードを削除する
 	 * @param id 指定のID
 	 */
