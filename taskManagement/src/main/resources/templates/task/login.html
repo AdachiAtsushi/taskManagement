@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+    <!-- FIXME ヘッダー部を共通化 -->
+    <h1>ログイン</h1>
+    <form method="post" action="#" th:action="@{/task/login}" th:object="${loginForm}">
+        <label for="userName">ユーザー名：</label>
+        <input id="userName" name="userName" type="text" th:field="*{userName}"><br>
+        <label for="password">パスワード：</label>
+        <input id="password" name="password" type="text" th:field="*{password}"><br>
+        <input type="submit" value="ログイン">
+    </form>
+    <a href="">パスワードを忘れた場合</a>
+    <!-- FIXME フッター部を共通化 -->
+</body>
+</html>
