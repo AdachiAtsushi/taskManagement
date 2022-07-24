@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>タスク詳細</title>
+<head th:replace="~{block/header::meta_header('タスク詳細',~{::link},~{::script})}">
 </head>
 <body>
-    <!-- FIXME ヘッダー部を共通化 -->
+    <div th:replace="~{block/header::header}"></div>
     <h1>詳細画面</h1>
     <form method="POST" action="#" th:action="@{/task}" th:object=${task}>
         <label for="id">ID：</label>
@@ -46,6 +44,6 @@
         <input type="submit" name="update" value="更新">
         <input type="submit" name="delete" value="削除">
     </form>
-    <!-- FIXME フッター部を共通化 -->
+    <div th:replace="~{block/footer::footer}"></div>
 </body>
 </html>

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>タスク登録画面</title>
+<head th:replace="~{block/header::meta_header('タスク登録画面',~{::link},~{::script})}">
 </head>
 <body>
-    <!-- FIXME ヘッダー部を共通化 -->
+    <div th:replace="~{block/header::header}"></div>
     <h1>タスク登録画面</h1>
     
     <form method="POST" action="#" th:action="@{/task/register}" th:object="${taskForm}">
@@ -36,7 +34,6 @@
         
         <input type="submit" value="登録">
     </form>
-    
-    <!-- FIXME フッター部を共通化 -->
+    <div th:replace="~{block/footer::footer}"></div>
 </body>
 </html>
