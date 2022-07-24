@@ -49,7 +49,7 @@ public class Task implements Serializable {
 	 * 優先度
 	 */
 	@OneToOne
-	@JoinColumn(name = "priority", insertable = false, updatable = true)
+	@JoinColumn(name = "priority", insertable = true, updatable = true)
 	private MstPriority mstPriority;
 	
 	/**
@@ -70,7 +70,7 @@ public class Task implements Serializable {
 	 * ステータスID
 	 */
 	@OneToOne
-	@JoinColumn(name = "status_id", insertable = false, updatable = true)
+	@JoinColumn(name = "status_id", insertable = true, updatable = true)
 	private MstStatus mstStatus;
 	
 }
