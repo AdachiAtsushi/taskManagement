@@ -59,11 +59,16 @@ public class TaskDetailService {
 	
 	/**
 	 * テーブル名「タスク」を更新する
+	 * @param task
 	 */
 	public void updateTask(Task task) {
 		this.taskRepository.save(task);
 	}
 	
+	/**
+	 * テーブル名「タスク」を削除する
+	 * @param id
+	 */
 	public void deleteTask(int id) {
 		this.taskRepository.deleteById(id);
 	}
