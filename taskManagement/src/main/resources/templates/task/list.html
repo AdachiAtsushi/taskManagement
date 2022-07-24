@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>タスク管理一覧</title>
+<head th:replace="~{block/header::meta_header('タスク管理一覧',~{::link},~{::script})}">
     <script type="text/javascript" th:src="@{/js/task_list.js}"></script>
 </head>
 <body>
-    <!-- FIXME ヘッダー部を共通化 -->
-    
+    <div th:replace="~{block/header::header}"></div>
     <!-- 検索キーワード入力欄-->
     <form method="GET" th:action="@{/task/search}">
         <input id="keyword" name="keyword" type="text">
@@ -37,6 +34,6 @@
             </tr>
         </tbody>
     </table>
-    <!-- FIXME フッター部を共通化 -->
+    <div th:replace="~{block/footer::footer}"></div>
 </body>
 </html>
