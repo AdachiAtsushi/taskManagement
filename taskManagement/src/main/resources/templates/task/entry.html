@@ -4,35 +4,53 @@
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
-    <h1>タスク登録画面</h1>
-    
+    <h2 class="pt-4 text-center">タスク登録画面</h2>
     <form method="POST" action="#" th:action="@{/task/register}" th:object="${taskForm}">
-        <label for="id">ID：</label>
-        <!-- FIXME スタイルを検討する -->
-        <input id="id" name="id" type="text" readonly tabindex="-1" th:field="*{id}" style="border: 0;"><br>
-        
-        <label for="title">タイトル：
-        <input id="title" name="title" type="text" th:field="*{title}"><br>
-        
-        <label for="comment">コメント：
-        <textarea name="comment" id="comment" rows="2" cols="40" th:field="*{comment}"></textarea><br>
-        
-        <label for="priority">優先度：
-        <select for="priority" name="priority">
-            <option 
-                th:each="priorityObj : ${priorityList}" 
-                th:value="${priorityObj.priority}" 
-                th:selected="${priorityObj.priority == priority}">[[${priorityObj.priorityText}]]
-            </option>
-        </select><br>
-        
-        <label for="startTime">開始日：
-        <input id="startTime" name="startTime" type="datetime-local" th:value="*{startTime}"><br>
-        
-        <label for="endTime">終了日時：
-        <input id="endTime" name="endTime" type="datetime-local" th:field="*{endTime}"><br>
-        
-        <input type="submit" value="登録">
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="id" class="col-sm-2 form-label">ID</label>
+            <div class="col-sm-2">
+                <input id="id" class="col-sm-2 pt-0 form-control-plaintext" name="id" type="text" th:field="*{id}"><br>
+            </div>
+        </div>
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="title" class="col-sm-2 form-label">タイトル</label>
+            <div class="col-sm-2">
+                <input id="title" class="form-control" name="title" type="text" placeholder="例：英単語学習" th:field="*{title}"><br>
+            </div>
+        </div>
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="comment" class="col-sm-2 form-label">コメント</label>
+            <div class="col-sm-2">
+                <textarea id="comment" class="form-control" name="comment" rows="5" cols="40" th:field="*{comment}"></textarea><br>
+            </div>
+        </div>
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="priority" class="col-sm-2 form-label">優先度</label>
+            <div class="col-sm-2">
+                <select class="form-select" name="priority">
+                    <option 
+                        th:each="priorityObj : ${priorityList}" 
+                        th:value="${priorityObj.priority}" 
+                        th:selected="${priorityObj.priority == priority}">[[${priorityObj.priorityText}]]
+                    </option>
+                </select><br>
+            </div>
+        </div>
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="startTime" class="col-sm-2 form-label">開始日</label>
+            <div class="col-sm-2">
+                <input id="startTime" class="form-control" name="startTime" type="datetime-local" th:value="*{startTime}"><br>
+            </div>
+        </div>
+        <div class="form-group row pt-3 justify-content-center">
+            <label for="endTime" class="col-sm-2 form-label">終了日時</label>
+            <div class="col-sm-2">
+                <input id="endTime" class="form-control" name="endTime" type="datetime-local" th:field="*{endTime}"><br>
+            </div>
+        </div>
+        <div class="text-center pt-4">
+            <input class="btn btn-primary" type="submit" value="登録">
+        </div>
     </form>
     <div th:replace="~{block/footer::footer}"></div>
 </body>
