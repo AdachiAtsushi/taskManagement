@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.MstPriority;
+import com.example.demo.entity.MstStatus;
 import com.example.demo.entity.Task;
 import com.example.demo.repository.MstPriorityRepository;
+import com.example.demo.repository.MstStatusRepository;
 import com.example.demo.repository.TaskRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class TaskEntryService {
 	
 	@Autowired
 	private MstPriorityRepository mstPriorityRepository;
+	
+	@Autowired
+	private MstStatusRepository mstStatusRepository;
 	
 	/**
 	 * テーブル名「Task」のIDの最大値を取得する
@@ -42,4 +47,13 @@ public class TaskEntryService {
 	public List<MstPriority> findByMstPriority() {
 		return this.mstPriorityRepository.findAll();
 	}
+	
+	/**
+	 * マスタテーブル「ステータス」の全量データを取得する
+	 * @return List<MstStatus> マスタテーブル「ステータス」の全量データ
+	 */
+	public List<MstStatus> findByMstStatus() {
+		return this.mstStatusRepository.findAll();
+	}
+
 }

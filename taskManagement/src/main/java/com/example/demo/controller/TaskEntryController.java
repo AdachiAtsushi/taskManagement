@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.MstPriority;
+import com.example.demo.entity.MstStatus;
 import com.example.demo.entity.Task;
 import com.example.demo.form.TaskForm;
 import com.example.demo.service.TaskEntryService;
@@ -36,11 +37,13 @@ public class TaskEntryController {
 		TaskForm taskForm = new TaskForm();
 		taskForm.setId(this.service.searchTaskMaxId() + 1);
 		
-		// マスタテーブル名「優先度」より、全データを取得する
+		// マスタテーブル名「優先度」、「ステータス」より、全データを取得する
 		List<MstPriority> priorityList = this.service.findByMstPriority();
+		List<MstStatus> statusList = this.service.findByMstStatus();
 		
 		model.addAttribute("taskForm", taskForm);
 		model.addAttribute("priorityList", priorityList);
+		model.addAttribute("statusList", statusList);
 		
 		return "task/entry";
 	}
@@ -59,6 +62,15 @@ public class TaskEntryController {
 		
 		Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 		Task task = mapper.map(taskForm, Task.class);
+		
+		// マスタ群の設定
+		MstPriority mstPriority = new MstPriority();
+		mstPriority.setPriority(taskForm.getPriority());
+		MstStatus mstStatus = new MstStatus();
+		mstStatus.setStatusId(taskForm.getStatusId());
+		
+		task.setMstPriority(mstPriority);
+		task.setMstStatus(mstStatus);
 		
 		this.service.insertTask(task);
 		

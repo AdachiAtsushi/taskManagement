@@ -20,7 +20,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 	@Query("SELECT t FROM Task t WHERE t.title LIKE %:keyword% OR t.comment LIKE %:keyword% ORDER BY t.id ASC")
 	public List<Task> searchByTaskList(@Param("keyword") String keyword);
 	
-	@Query("SELECT MAX(t.id) FROM Task t WHERE NOT t.mstStatus.statusId = '4'")
+	@Query("SELECT MAX(t.id) FROM Task t")
 	public int findByMaxId();
 	
 	/**
