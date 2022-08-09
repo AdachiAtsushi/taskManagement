@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{block/header::meta_header('タスク管理一覧',~{::link},~{::script})}">
+    <script type="text/javascript" th:src="@{/js/task_list.js}"></script>
+</head>
+<body>
+    <div th:replace="~{block/header::header}"></div>
+    <!-- 検索キーワード入力欄-->
+    <form method="GET" th:action="@{/task/search}">
+        <input id="keyword" name="keyword" type="text">
+        <input id="clear" name="clear" type="button" value="クリア" onclick="textClear();">
+        <input type="submit" value="検索">
+    </form>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>優先度</th>
+                <th>開始日時</th>
+                <th>終了日時</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${taskList}">
+                <td th:text="${task.id}">ID</td>
+                <td th:text="${task.title}">タイトル</td>
+                <td th:text="${task.mstPriority.priorityText}">優先度</td>
+                <td th:text="${task.startTime}">2022/06/01 12:00</td>
+                <td th:text="${task.endTime}">2022/06/02 12:00</td>
+                <td><a th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
+                <td><a th:href="@{/task/delete(id=${task.id})}">削除</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="~{block/footer::footer}"></div>
+</body>
+</html>
