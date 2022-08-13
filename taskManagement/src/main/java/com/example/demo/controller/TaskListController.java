@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskListService;
@@ -48,10 +49,11 @@ public class TaskListController {
 	 * 削除機能
 	 */
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id") Integer id, Model model) {
+	public String delete(RedirectAttributes redirectAttributes, @RequestParam("id") Integer id, Model model) {
 		// 取得したIDより、テーブル名「Task」のレコードを削除する
 		this.service.delete(id);
 		
+		redirectAttributes.addFlashAttribute("deleteSuccess", true);
 		return "redirect:/task/list";
 	}
 	
