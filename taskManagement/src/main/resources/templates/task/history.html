@@ -1,41 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{block/header::meta_header('タスク履歴',~{::link},~{::script})}">
-    <script type="text/javascript" th:src="@{/js/task_history.js}"></script>
+    <link th:href="@{/css/table.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/common/list.js}"></script>
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
-    <!-- 検索キーワード入力欄-->
-    <form method="GET" th:action="@{/task/searchHistory}">
-        <input id="keyword" name="keyword" type="text">
-        <input id="clear" name="clear" type="button" value="クリア" onclick="textClear();">
-        <input type="submit" value="検索">
-    </form>
+    <!-- メッセージ群 -->
+    <div id="deleteSuccess" th:if="${deleteSuccess}">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <strong>タスクを削除しました</strong>
+            <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
+        </div>
+    </div>
+    <div id="NotFindTask" th:if="${NotFindTaskResult}">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <strong>タスクが存在しませんでした</strong>
+            <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
+        </div>
+    </div>
     
-    <table>
+    <!-- 検索キーワード入力欄-->
+    <form class="mt-5 text-center" method="GET" th:action="@{/task/searchHistory}">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-3">
+                <input class="form-control" id="keyword" name="keyword" type="text" placeholder="検索...">
+                <div class="invalid-feedback keyword-err-msg">入力値が不正です</div>
+            </div>
+            <div  class="col-md-auto">
+                <input class="btn btn-primary" id="clear" name="clear" type="button" value="クリア" onclick="textClear();">
+            </div>
+            <div  class="col-md-auto">
+                <input class="btn btn-primary" id="search" type="submit" value="検索">
+            </div>
+        </div>
+    </form>
+    <!-- テーブル一覧 -->
+    <table class="mt-5 table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-                <th>優先度</th>
-                <th>ステータス</th>
-                <th>開始日時</th>
-                <th>終了日時</th>
+                <th scope="col">#</th>
+                <th scope="col">タイトル</th>
+                <th scope="col">コメント</th>
+                <th scope="col">優先度</th>
+                <th scope="col">ステータス</th>
+                <th scope="col">開始日時</th>
+                <th scope="col">終了日時</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             <tr th:each="task : ${taskList}">
                 <td th:text="${task.id}">ID</td>
                 <td th:text="${task.title}">タイトル</td>
+                <td class="table-record-comment" th:text="${task.comment}">コメント</td>
                 <td th:text="${task.mstPriority.priorityText}">優先度</td>
                 <td th:text="${task.mstStatus.statusText}">ステータス</td>
-                <td th:text="${task.startTime}">2022/06/01 12:00</td>
-                <td th:text="${task.endTime}">2022/06/02 12:00</td>
-                <td><a th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
-                <td><a th:href="@{/task/deleteHistory(id=${task.id})}">削除</a></td>
+                <td th:text="${#temporals.format(task.startTime, 'yyyy/MM/dd hh:mm')}">2022/06/01 12:00</td>
+                <td th:text="${#temporals.format(task.endTime, 'yyyy/MM/dd hh:mm')}">2022/06/02 12:00</td>
+                <td><a class="btn btn-primary" th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
+                <td><a class="btn btn-primary" th:data-id="${task.id}" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="history">削除</a></td>
             </tr>
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">タスクを削除しますか？</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        指定したタスクを削除します。
+                        <br>
+                        削除したタスクは元に戻せません。
+                        <br>
+                    </p>
+                    <p>タスクを削除しますか？</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" id="delete" href="#">削除</a>
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div th:replace="~{block/footer::footer}"></div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 CREATE TABLE task (
     id INT NOT NULL,
-    title VARCHAR(10) NOT NULL,
-    comment VARCHAR(100) NOT NULL,
+    title VARCHAR(20) NOT NULL,
+    comment VARCHAR(50) NOT NULL,
     priority CHAR(1) NOT NULL,
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
