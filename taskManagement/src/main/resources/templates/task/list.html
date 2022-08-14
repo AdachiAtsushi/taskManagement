@@ -2,13 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{block/header::meta_header('タスク管理一覧',~{::link},~{::script})}">
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
-    <script type="text/javascript" th:src="@{/js/task_list.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common/list.js}"></script>
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
+    <!-- メッセージ群 -->
     <div id="deleteSuccess" th:if="${deleteSuccess}">
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>タスクを削除しました</strong>
+            <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
+        </div>
+    </div>
+    <div id="NotFindTask" th:if="${NotFindTaskResult}">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <strong>タスクが存在しませんでした</strong>
             <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
         </div>
     </div>
@@ -24,11 +31,12 @@
                 <input class="btn btn-primary" id="clear" name="clear" type="button" value="クリア" onclick="textClear();">
             </div>
             <div  class="col-md-auto">
-                <input class="btn btn-primary" type="submit" value="検索">
+                <input class="btn btn-primary" id="search" type="submit" value="検索">
             </div>
         </div>
     </form>
     
+    <!-- テーブル一覧 -->
     <table class="mt-5 table table-striped">
         <thead>
             <tr>
@@ -51,7 +59,7 @@
                 <td th:text="${#temporals.format(task.startTime, 'yyyy/MM/dd hh:mm')}">2022/06/01 12:00</td>
                 <td th:text="${#temporals.format(task.endTime, 'yyyy/MM/dd hh:mm')}">2022/06/02 12:00</td>
                 <td><a class="btn btn-primary" th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
-                <td><a class="btn btn-primary" th:data-id="${task.id}" data-bs-toggle="modal" data-bs-target="#deleteModal">削除</a></td>
+                <td><a class="btn btn-primary" th:data-id="${task.id}" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="list">削除</a></td>
             </tr>
         </tbody>
     </table>

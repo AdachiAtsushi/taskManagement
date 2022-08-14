@@ -5,6 +5,7 @@
  */
 $(window).on('click', function() {
     $('#deleteSuccess').hide();
+    $('#NotFindTask').hide();
 });
 
 /** 
@@ -56,9 +57,25 @@ function keywordValidate(keyword) {
     }
 }
 
-
-
-
+/**
+    検索ボタン押下時チェック処理
+ */
+$(function() {
+    $('#search').on('click', function() {
+        let keyword = $('#keyword').val();
+        
+        // 入力欄が空文字だった場合、検索ボタンのイベントを中止する
+        if (keyword === '' || keyword === undefined) {
+            return false;
+        }
+        
+        // 入力欄にエラー表示が出ている場合、検索ボタンのイベントを中止する
+        if ($('#keyword').hasClass('is-invalid')) {
+            return false;
+        }
+        
+    })
+});
 
 /**
     削除モーダルウインドウ
@@ -68,6 +85,12 @@ $(function() {
     $('#deleteModal').on('show.bs.modal', function(event) {
         let button = $(event.relatedTarget);
         let taskId = button.data('id');
-        $('#delete').attr('href', `/task/delete?id=${taskId}`);
+        let screenType = button.data('bs-whatever');
+        
+        if (screenType === 'list') {
+            $('#delete').attr('href', `/task/delete?id=${taskId}`);
+        } else if (screenType === 'history') {
+            $('#delete').attr('href', `/task/deleteHistory?id=${taskId}`);
+        }
     });
 });

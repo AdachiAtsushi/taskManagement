@@ -39,8 +39,14 @@ public class TaskListController {
 	@GetMapping("/search")
 	public String searchList(@RequestParam("keyword") String keyword, Model model) {
 		List<Task> list = this.service.getSearchTaskList(keyword);
-		
 		model.addAttribute("taskList", list);
+		
+		// ŒŸõŒ‹‰Ê‚ª0Œ‚Ìê‡
+		if (list.size() == 0) {
+			model.addAttribute("NotFindTaskResult", true);
+		} else {
+			model.addAttribute("NotFindTaskResult", false);
+		}
 		
 		return "task/list";
 	}
