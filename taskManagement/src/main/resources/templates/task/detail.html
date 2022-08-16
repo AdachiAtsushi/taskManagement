@@ -4,45 +4,72 @@
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
-    <h1>詳細画面</h1>
-    <form method="POST" action="#" th:action="@{/task}" th:object=${task}>
-        <label for="id">ID：</label>
-        <input id="id" name="id" type="text" readonly tabindex="-1" th:field="*{id}"><br>
+    <h2 class="mt-4 mb-4 text-center">詳細画面</h2>
+    <form class="row mt-4 needs-validation" method="POST" action="#" th:action="@{/task}" th:object=${task} novalidate>
+        <div class="row mb-4 justify-content-center">
+            <label for="id" class="col-sm-1 form-label">ID</label>
+            <div class="col-sm-2">
+                <input id="id" class="pt-0 form-control-plaintext" readonly tabindex="-1" name="id" type="text" th:field="*{id}">
+            </div>
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <label for="title" class="col-sm-1 form-label">タイトル</label>
+            <div class="col-sm-2">
+                <input id="title" class="form-control title-validate" name="title" type="text" th:field="*{title}" required>
+                <div class="invalid-feedback title-err-msg">タイトルが不正です</div>
+            </div>
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <label for="comment" class="col-sm-1 form-label">コメント</label>
+            <div class="col-sm-2">
+                <textarea id="comment" class="form-control textarea-validate" name="comment" rows="5" cols="40" th:field="*{comment}" required></textarea>
+                <div class="invalid-feedback textarea-err-msg">コメントが不正です</div>
+            </div>
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <label for="priority" class="col-sm-1 form-label">優先度</label>
+            <div class="col-sm-2">
+                <select class="form-select" name="priority">
+                    <option 
+                        th:each="priorityObj : ${priorityList}" 
+                        th:value="${priorityObj.priority}" 
+                        th:text="${priorityObj.priorityText}" >
+                    </option>
+                </select><br>
+            </div>
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <label for="startTime" class="col-sm-1 form-label">開始日時</label>
+            <div class="col-sm-2">
+                <input id="startTime" class="form-control startTime-validate" name="startTime" type="datetime-local" th:value="*{startTime}" required>
+                <div class="invalid-feedback startTime-err-msg">開始日が不正です</div>
+            </div>
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <label for="endTime" class="col-sm-1 form-label">終了日時</label>
+            <div class="col-sm-2">
+                <input id="endTime" class="form-control endTime-validate" name="endTime" type="datetime-local" th:value="*{endTime}" required>
+                <div class="invalid-feedback endTime-err-msg">終了日が不正です</div>
+            </div>
+        </div>
+        <div class="row mb-2 justify-content-center">
+            <label for="statusId" class="col-sm-1 form-label">ステータス</label>
+            <div class="col-sm-2">
+                <select class="form-select" name="statusId">
+                    <option 
+                        th:each="statusObj : ${statusList}" 
+                        th:value="${statusObj.statusId}" 
+                        th:text="${statusObj.statusText}" >
+                    </option>
+                </select><br>
+            </div>
+        </div>
+        <div class="text-center pt-4">
+            <input class="btn btn-primary" type="submit" name="update" value="更新">
+            <input class="btn btn-primary" type="submit" name="delete" value="削除">
+            <input class="btn btn-secondary" type="submit" name="cancel" value="キャンセル">
+        </div>
         
-        <label>タイトル：</label>
-        <input id="title" name="title" type="text" th:field="*{title}"><br>
-        
-        <label>コメント：</label>
-        <textarea id="comment" name="comment" rows="2" cols="40" th:field="*{comment}"></textarea><br>
-        
-        <label for="priority">優先度：</label>
-        <select for="priority" name="priority">
-            <option 
-                th:each="priorityObj : ${priorityList}" 
-                th:value="${priorityObj.priority}" 
-                th:text="${priorityObj.priorityText}" 
-                th:selected="${priorityObj.priority} == *{mstPriority.priority}">
-            </option>
-        </select><br>
-        
-        <label for="startTime">開始日時：</label>
-        <input id="startTime" name="startTime" type="datetime-local" th:value="*{startTime}"><br>
-        
-        <label for="endTime">終了日時：</label>
-        <input id="endTime" name="endTime" type="datetime-local" th:value="*{endTime}"><br>
-        
-        <label for="statusId">ステータス：</label>
-        <select for="statusId" name="statusId">
-            <option 
-                th:each="statusObj : ${statusList}" 
-                th:value="${statusObj.statusId}" 
-                th:text="${statusObj.statusText}" 
-                th:selected="${statusObj.statusId} == *{mstStatus.statusId}">
-            </option>
-        </select><br>
-        
-        <input type="submit" name="update" value="更新">
-        <input type="submit" name="delete" value="削除">
     </form>
     <div th:replace="~{block/footer::footer}"></div>
 </body>
