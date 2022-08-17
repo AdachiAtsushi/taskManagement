@@ -5,6 +5,7 @@
  */
 $(window).on('click', function() {
     $('#deleteSuccess').hide();
+    $('#updateSuccess').hide();
     $('#NotFindTask').hide();
 });
 
