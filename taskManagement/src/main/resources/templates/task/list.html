@@ -13,13 +13,18 @@
             <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
         </div>
     </div>
+    <div id="updateSuccess" th:if="${updateSuccess}">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <strong>タスクの更新が完了しました</strong>
+            <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
+        </div>
+    </div>
     <div id="NotFindTask" th:if="${NotFindTaskResult}">
         <div class="alert alert-info alert-dismissible" role="alert">
             <strong>タスクが存在しませんでした</strong>
             <button type="button" class="btn-close delete-close" data-bs-dismiss="alert" aria-label="閉じる"></button>
         </div>
     </div>
-    
     <!-- 検索キーワード入力欄-->
     <form class="mt-5 text-center" method="GET" th:action="@{/task/search}">
         <div class="row justify-content-md-center">
@@ -35,7 +40,6 @@
             </div>
         </div>
     </form>
-    
     <!-- テーブル一覧 -->
     <table class="mt-5 table table-striped">
         <thead>
@@ -58,7 +62,7 @@
                 <td th:text="${task.mstStatus.statusText}">ステータス</td>
                 <td th:text="${#temporals.format(task.startTime, 'yyyy/MM/dd hh:mm')}">2022/06/01 12:00</td>
                 <td th:text="${#temporals.format(task.endTime, 'yyyy/MM/dd hh:mm')}">2022/06/02 12:00</td>
-                <td><a class="btn btn-primary" th:href="@{/task/detail(id=${task.id})}">詳細</a></td>
+                <td><a class="btn btn-primary" th:href="@{/task/detail(id=${task.id},screenType='list')}">詳細</a></td>
                 <td><a class="btn btn-primary" th:data-id="${task.id}" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="list">削除</a></td>
             </tr>
         </tbody>

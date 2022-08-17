@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{block/header::meta_header('タスク詳細',~{::link},~{::script})}">
+    <script type="text/javascript" th:src="@{/js/common/form.js}"></script>
+    <script type="text/javascript" th:src="@{/js/task_detail.js}"></script>
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
@@ -52,7 +54,7 @@
                 <div class="invalid-feedback endTime-err-msg">終了日が不正です</div>
             </div>
         </div>
-        <div class="row mb-2 justify-content-center">
+        <div class="row mb-4 justify-content-center">
             <label for="statusId" class="col-sm-1 form-label">ステータス</label>
             <div class="col-sm-2">
                 <select class="form-select" name="statusId">
@@ -64,13 +66,35 @@
                 </select><br>
             </div>
         </div>
-        <div class="text-center pt-4">
-            <input class="btn btn-primary" type="submit" name="update" value="更新">
-            <input class="btn btn-primary" type="submit" name="delete" value="削除">
-            <input class="btn btn-secondary" type="submit" name="cancel" value="キャンセル">
+        <div class="text-center mt-2">
+            <input id="screen-type" type="hidden" th:value=${screenType} >
+            <input class="btn btn-primary" id="update" type="submit" name="update" value="更新">
+            <input class="btn btn-primary" type="button" name="delete" th:data-id="*{id}" data-bs-toggle="modal" data-bs-target="#deleteModal" value="削除">
+            <input class="btn btn-secondary" id="cancel" type="button" name="cancel" value="キャンセル">
         </div>
-        
     </form>
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">タスクを削除しますか？</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        指定したタスクを削除します。
+                        <br>
+                        削除したタスクは元に戻せません。
+                        <br>
+                    </p>
+                    <p>タスクを削除しますか？</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" id="delete" href="#">削除</a>
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div th:replace="~{block/footer::footer}"></div>
 </body>
 </html>

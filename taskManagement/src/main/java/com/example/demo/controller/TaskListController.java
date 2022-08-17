@@ -55,10 +55,11 @@ public class TaskListController {
 	 * 削除機能
 	 */
 	@GetMapping("/delete")
-	public String delete(RedirectAttributes redirectAttributes, @RequestParam("id") Integer id, Model model) {
+	public String delete(RedirectAttributes redirectAttributes, @RequestParam("id") int id) {
 		// 取得したIDより、テーブル名「Task」のレコードを削除する
 		this.service.delete(id);
 		
+		// 削除成功メッセージを出力するための処理
 		redirectAttributes.addFlashAttribute("deleteSuccess", true);
 		return "redirect:/task/list";
 	}
