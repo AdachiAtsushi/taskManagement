@@ -6,7 +6,7 @@
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
-    <h2 class="mt-4 mb-4 text-center">詳細画面</h2>
+    <h2 class="mt-4 mb-4 text-center">タスク詳細</h2>
     <form class="row mt-4 needs-validation" method="POST" action="#" th:action="@{/task}" th:object=${task} novalidate>
         <div class="row mb-4 justify-content-center">
             <label for="id" class="col-sm-1 form-label">ID</label>
