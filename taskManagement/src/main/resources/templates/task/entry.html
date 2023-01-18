@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{block/header::meta_header('タスク登録画面',~{::link},~{::script})}">
     <script type="text/javascript" th:src="@{/js/common/form.js}"></script>
+    <script type="text/javascript" th:src="@{/js/task_list.js}"></script>
 </head>
 <body>
     <div th:replace="~{block/header::header}"></div>
-    <h2 class="mt-4 mb-4 text-center">タスク登録画面</h2>
+    <h2 class="mt-4 mb-4 text-center">タスク登録</h2>
     <form class="row mt-4 needs-validation" method="POST" action="#" th:action="@{/task/register}" th:object="${taskForm}" novalidate>
         <div class="row mb-4 justify-content-center">
             <label for="id" class="col-sm-1 form-label">ID</label>
@@ -51,7 +52,7 @@
         <div class="row mb-4 justify-content-center">
             <label for="endTime" class="col-sm-1 form-label">終了日時</label>
             <div class="col-sm-2">
-                <input id="endTime" class="form-control endTime-validate" name="endTime" type="datetime-local" th:field="*{endTime}" required>
+                <input id="endTime" class="form-control endTime-validate" name="endTime" type="datetime-local" th:value="*{endTime}" required>
                 <div class="invalid-feedback endTime-err-msg">終了日が不正です</div>
             </div>
         </div>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskHistoryService;
@@ -42,8 +43,14 @@ public class TaskHistoryController {
 	@GetMapping("searchHistory")
 	public String searchHistory(@RequestParam("keyword") String keyword, Model model) {
 		List<Task> taskList = this.service.getSearctClosingTaskList(keyword);
-		
 		model.addAttribute("taskList", taskList);
+		
+		// åüçıåãâ Ç™0åèÇÃèÍçá
+		if (taskList.size() == 0) {
+			model.addAttribute("NotFindTaskResult", true);
+		} else {
+			model.addAttribute("NotFindTaskResult", false);
+		}
 		
 		return "task/history";
 	}
@@ -54,9 +61,10 @@ public class TaskHistoryController {
 	 * @return
 	 */
 	@GetMapping("/deleteHistory")
-	public String delete(@RequestParam("id") Integer id) {
+	public String delete(RedirectAttributes redirectAttributes, @RequestParam("id") Integer id) {
 		this.service.deleteTaskHistory(id);
 		
+		redirectAttributes.addFlashAttribute("deleteSuccess", true);
 		return "redirect:/task/history";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.MstPriority;
 import com.example.demo.entity.MstStatus;
@@ -33,7 +34,7 @@ public class TaskDetailController {
 	 * @return
 	 */
 	@GetMapping("/detail")
-	public String initDetailScreen(@RequestParam("id") int id, Model model) {
+	public String initDetailScreen(@RequestParam("id") int id, @RequestParam("screenType") String screenType, Model model) {
 		// テーブル名「タスク」から詳細画面に表示する対象レコードを取得
 		Task task = this.service.findByTask(id);
 		
@@ -44,6 +45,7 @@ public class TaskDetailController {
 		model.addAttribute("task", task);
 		model.addAttribute("priorityList", priorityList);
 		model.addAttribute("statusList", statusList);
+		model.addAttribute("screenType", screenType);
 		
 		return "task/detail";
 	}
@@ -56,7 +58,7 @@ public class TaskDetailController {
 	 * @return
 	 */
 	@PostMapping(params = "update")
-	public String update(@Validated TaskForm taskForm, BindingResult result) {
+	public String update(RedirectAttributes redirectAttributes, @Validated TaskForm taskForm, BindingResult result) {
 		if (result.hasErrors()) {
 			return "task/detail";
 		}
@@ -79,13 +81,19 @@ public class TaskDetailController {
 		
 		this.service.updateTask(task);
 		
+		// 削除成功メッセージを出力するための処理
+		redirectAttributes.addFlashAttribute("updateSuccess", true);
+		
 		// タスク一覧画面にリダイレクト処理を実施する
 		return "redirect:/task/list";
 	}
 	
-	@PostMapping(params = "delete")
-	public String delete(TaskForm taskForm) {
-		this.service.deleteTask(taskForm.getId());
+	@GetMapping("/detailDelete")
+	public String detailDelete(RedirectAttributes redirectAttributes, @RequestParam("id") int id) {
+		this.service.deleteTask(id);
+		
+		// 削除成功メッセージを出力するための処理
+		redirectAttributes.addFlashAttribute("deleteSuccess", true);
 		
 		// タスク一覧画面にリダイレクト処理を実施する
 		return "redirect:/task/list";
